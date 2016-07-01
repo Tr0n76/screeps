@@ -100,16 +100,6 @@ var create = function() {
            
 }
 
-var report = function(){
-	
-	var sources = creep.room.find(FIND_SOURCES);
-	
-	for (var item in sources){
-		console.log("Source "+ item.id + " Creeps "+ getCreepCountForSource(item));
-	}
-	
-}
-
 // Creates a single creep with the given role and work
 var	createCreep = function(roleTyp, counter, work){
     var exisitingCreeps = _.filter(Game.creeps, (creep) => creep.memory.role == roleTyp);       
