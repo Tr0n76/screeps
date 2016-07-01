@@ -29,18 +29,40 @@ var setRoleForCreep = function(creep){
     }
 } 
 
+// Counts the creeps attached to the given source.
+var getCreepCountForSource = function(source){
+	var count = 0;
+	 for(var name in Game.creeps) {	    	
+	    	var creep = Game.creeps[name];
+	    	if (creep.memory.sourceId == source.id){
+	    		count++;
+	    	}
+	 }
+	 return count;
+}
+
+// Gets the source with the lowest creep count.
+var getSourceWithMinCreepCount = function(){
+	 var sources = creep.room.find(FIND_SOURCES);
+	 var minSource = sources[0];	 
+	 for (var source in sources){
+		 var minSourceCount = getCreepCountForSource(minSource);
+		 if (minSourceCount >  getCreepCountForSource(source)){
+			 minSource = source;
+		 }
+	 }
+	 return source;
+}
+
 // Getting the source for the given creep. If the creep is not assinged to a
 // source a source is randomly chossen and saved for the creep.
 var getSourceForCreep = function(creep){		
 	 var sources = creep.room.find(FIND_SOURCES);
-	 var sourceForCreep = sources[0];
+	 var sourceToMine = sources[0];
 	 
-	// If there is more than one source every harvester is randomly assigned
-	// to one of the sources.
+	// If the creep has no assigned source the source with the minimun creep count is set for the creep.
     if (creep.memory.sourceId === undefined){
-        if (sources.length>1)    {
-            sourceToMine = sources[rand(0,sources.length-1)];               
-        }
+    	sourceToMine = getSourceWithMinCreepCount();
         creep.memory.sourceId = sourceToMine.id;
         console.log(creep.name+"  role: "+creep.memory.role+ " source: "+creep.memory.sourceId);
     }
