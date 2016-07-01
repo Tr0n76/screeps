@@ -3,17 +3,12 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleGuard = require('role.guard');
 
-
 module.exports.loop = function(){
-	   create();
-   	   
+	manageCreeps();	   	   
 	    for(var name in Game.creeps) {	    	
 	    	var creep = Game.creeps[name];
 	    	setRoleForCreep(creep);	 
-	    	report(creep);
-	    }    
-	    
-	  
+	    }        
 }
 
 // Runs the role for the given creep.
@@ -32,46 +27,18 @@ var setRoleForCreep = function(creep){
     }
 } 
 
-// Counts the creeps attached to the given source.
-var getCreepCountForSource = function(source){
-	var count = 0;
-	 for(var name in Game.creeps) {	    	
-	    	var creep = Game.creeps[name];
-	    	if (creep.memory.sourceId == source.id){
-	    		count++;
-	    	}
-	 }
-	 return count;
-}
-
-// Gets the source with the lowest creep count.
-var getSourceWithMinCreepCount = function(creep){
-    var minSource = null;
-    
-	 for (var tmpSource in creep.room.find(FIND_SOURCES)){
-	     if (minSource==null){
-	         minSource = creep.room.find(FIND_SOURCES)[0];
-	     }
-		 var minSourceCount = getCreepCountForSource(minSource);
-		 var tmpSourceCount = getCreepCountForSource(tmpSource);
-		 
-	
-		 if((minSourceCount >  tmpSourceCount) && (tmpSource.id  !== undefined)){
-			 minSource = tmpSource;
-		 }
-	 }
-	 return minSource;
-}
-
 // Getting the source for the given creep. If the creep is not assinged to a
 // source a source is randomly chossen and saved for the creep.
 var getSourceForCreep = function(creep){		
 	 var sources = creep.room.find(FIND_SOURCES);
-	 var sourceToMine = sources[0];
+	 var sourceForCreep = sources[0];
 	 
-	// If the creep has no assigned source the source with the minimun creep count is set for the creep.
+	// If there is more than one source every harvester is randomly assigned
+	// to one of the sources.
     if (creep.memory.sourceId === undefined){
-    	sourceToMine = getSourceWithMinCreepCount(creep);
+        if (sources.length>1)    {
+            sourceToMine = sources[rand(0,sources.length-1)];               
+        }
         creep.memory.sourceId = sourceToMine.id;
         console.log(creep.name+"  role: "+creep.memory.role+ " source: "+creep.memory.sourceId);
     }
@@ -84,7 +51,7 @@ var rand = function(min, max) {
 }
 
 // Creating all the creeps.
-var create = function() {
+var manageCreeps = function() {
 	
 	clean();
 	
@@ -101,16 +68,6 @@ var create = function() {
 		return;
 	}
            
-}
-
-var report = function(creep){
-	
-	var sources = creep.room.find(FIND_SOURCES);
-	
-	for (var item in sources){
-		console.log("Source "+ item.id + " Creeps "+ getCreepCountForSource(item));
-	}
-	
 }
 
 // Creates a single creep with the given role and work
