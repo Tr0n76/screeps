@@ -34,9 +34,10 @@ module.exports.loop = function () {
         }
     }        
 }
+
+	// Getting an integer random number wihtin the defined borders.
     var rand = function(min, max) {	
-        return Math.floor(Math.random() * (max - min + 1)) + min
-        
+        return Math.floor(Math.random() * (max - min + 1)) + min       
     }
 
     var create = function() {
