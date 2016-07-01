@@ -4,10 +4,7 @@ var roleBuilder = require('role.builder');
 var roleGuard = require('role.guard');
 
 
-module.exports.loop = main();
-
-// Controller. Everything starts here.
-var main = function(){
+module.exports.loop = function(){
 	   create();
    	   
 	    for(var name in Game.creeps) {
