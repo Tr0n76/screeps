@@ -40,6 +40,7 @@ module.exports.loop = function () {
         return Math.floor(Math.random() * (max - min + 1)) + min       
     }
 
+    // Creating the creeps.
     var create = function() {
 
     	clean();
