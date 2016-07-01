@@ -15,9 +15,7 @@ var roleGuard = {
 						+ " spottet. Attakinge.");
 			}
 		} else {
-			if (!creep.pos.isNearTo(spawn)) {
-				creep.moveTo(spawn);
-			}
+						
 		}
 	}
 }
