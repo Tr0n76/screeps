@@ -42,7 +42,7 @@ var getCreepCountForSource = function(source){
 }
 
 // Gets the source with the lowest creep count.
-var getSourceWithMinCreepCount = function(){
+var getSourceWithMinCreepCount = function(creep){
 	 var sources = creep.room.find(FIND_SOURCES);
 	 var minSource = sources[0];	 
 	 for (var source in sources){
@@ -62,7 +62,7 @@ var getSourceForCreep = function(creep){
 	 
 	// If the creep has no assigned source the source with the minimun creep count is set for the creep.
     if (creep.memory.sourceId === undefined){
-    	sourceToMine = getSourceWithMinCreepCount();
+    	sourceToMine = getSourceWithMinCreepCount(creep);
         creep.memory.sourceId = sourceToMine.id;
         console.log(creep.name+"  role: "+creep.memory.role+ " source: "+creep.memory.sourceId);
     }
