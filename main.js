@@ -7,8 +7,9 @@ var roleGuard = require('role.guard');
 module.exports.loop = function(){
 	   create();
    	   
-	    for(var creep in Game.creeps) {
-	       setRoleForCreep(creep);	 
+	    for(var name in Game.creeps) {	    	
+	    	var creep = Game.creeps[name];
+	    	setRoleForCreep(creep);	 
 	    }        
 }
 
