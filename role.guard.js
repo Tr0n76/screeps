@@ -15,7 +15,7 @@ var roleGuard = {
 						+ " spottet. Attakinge.");
 			}
 		} else {
-						
+			creep.moveTo(Game.spawns[0]);		
 		}
 	}
 }
