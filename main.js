@@ -10,9 +10,10 @@ module.exports.loop = function(){
 	    for(var name in Game.creeps) {	    	
 	    	var creep = Game.creeps[name];
 	    	setRoleForCreep(creep);	 
+	    	report(creep);
 	    }    
 	    
-	    report();
+	  
 }
 
 // Runs the role for the given creep.
@@ -102,7 +103,7 @@ var create = function() {
            
 }
 
-var report = function(){
+var report = function(creep){
 	
 	var sources = creep.room.find(FIND_SOURCES);
 	
