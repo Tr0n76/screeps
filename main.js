@@ -48,7 +48,7 @@ var getSourceWithMinCreepCount = function(creep){
     var minSource = null;
     
 	 for (var i = 0; i < sources.length ; i++ ){
-		 var tmpSoure = sources[i];
+		 var tmpSource = sources[i];
 		 
 	     if (minSource==null){
 	         minSource = creep.room.find(FIND_SOURCES)[0];
@@ -79,11 +79,6 @@ var getSourceForCreep = function(creep){
     }
     return Game.getObjectById(creep.memory.sourceId);
 } 
-
-// Getting an integer random number wihtin the defined borders.
-var rand = function(min, max) {	
-    return Math.floor(Math.random() * (max - min + 1)) + min       
-}
 
 // Creating all the creeps.
 var create = function() {
