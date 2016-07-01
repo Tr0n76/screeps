@@ -43,15 +43,21 @@ var getCreepCountForSource = function(source){
 
 // Gets the source with the lowest creep count.
 var getSourceWithMinCreepCount = function(creep){
-	 var sources = creep.room.find(FIND_SOURCES);
-	 var minSource = sources[0];	 
-	 for (var source in sources){
+    var minSource = null;
+    
+	 for (var tmpSource in creep.room.find(FIND_SOURCES)){
+	     if (minSource==null){
+	         minSource = creep.room.find(FIND_SOURCES)[0];
+	     }
 		 var minSourceCount = getCreepCountForSource(minSource);
-		 if (minSourceCount >  getCreepCountForSource(source)){
-			 minSource = source;
+		 var tmpSourceCount = getCreepCountForSource(tmpSource);
+		 
+	
+		 if((minSourceCount >  tmpSourceCount) && (tmpSource.id  !== undefined)){
+			 minSource = tmpSource;
 		 }
 	 }
-	 return source;
+	 return minSource;
 }
 
 // Getting the source for the given creep. If the creep is not assinged to a
@@ -92,6 +98,16 @@ var create = function() {
 		return;
 	}
            
+}
+
+var report = function(){
+	
+	var sources = creep.room.find(FIND_SOURCES);
+	
+	for (var item in sources){
+		console.log("Source "+ item.id + " Creeps "+ getCreepCountForSource(item));
+	}
+	
 }
 
 // Creates a single creep with the given role and work
