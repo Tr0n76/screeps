@@ -2,7 +2,8 @@ var roleGuard = {
 
 	run : function(creep) {
 
-		var hostile = creep.room.findNearest(FIND_HOSTILE_CREEPS);
+		var hostiles = creep.room.find(FIND_HOSTILE_CREEPS);
+		var hostile = hostiles[0];
 		if (hostile) {
 			if (!creep.pos.isNearTo(target)) {
 				creep.moveTo(target);
