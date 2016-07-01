@@ -1,20 +1,15 @@
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
-var roleGuard = require('role.guard');
+
+var controllerCreeps = require('controller.creeps');
 
 
 module.exports.loop = function(){
-	   create();
-   	   
-	    for(var name in Game.creeps) {	    	
-	    	var creep = Game.creeps[name];
-	    	setRoleForCreep(creep);	 
-	    }        
+	
+	   controllerCreeps.run();
+	   
 }
 
 // Runs the role for the given creep.
-var setRoleForCreep = function(creep){
+function setRoleForCreep(creep){
    if(creep.memory.role == 'harvester') {
         roleHarvester.run(creep, getSourceForCreep(creep));
     }
@@ -30,7 +25,7 @@ var setRoleForCreep = function(creep){
 } 
 
 // Counts the creeps attached to the given source.
-var getCreepCountForSource = function(source){
+function getCreepCountForSource(source){
 	var count = 0;
 	 for(var name in Game.creeps) {	    	
 	    	var creep = Game.creeps[name];
@@ -42,8 +37,8 @@ var getCreepCountForSource = function(source){
 }
 
 // Gets the source with the lowest creep count.
-var getSourceWithMinCreepCount = function(creep){
-	var sources = creep.room.find(FIND_SOURCES);
+function getSourceWithMinCreepCount(creep){
+	 var sources = creep.room.find(FIND_SOURCES);
 
     var minSource = null;
     
@@ -66,7 +61,7 @@ var getSourceWithMinCreepCount = function(creep){
 
 // Getting the source for the given creep. If the creep is not assinged to a
 // source a source is randomly chossen and saved for the creep.
-var getSourceForCreep = function(creep){		
+function getSourceForCreep(creep){		
 	 var sources = creep.room.find(FIND_SOURCES);
 	 var sourceToMine = sources[0];
 	 
@@ -81,7 +76,7 @@ var getSourceForCreep = function(creep){
 } 
 
 // Creating all the creeps.
-var create = function() {
+function create() {
 	
 	clean();
 	
@@ -101,7 +96,7 @@ var create = function() {
 }
 
 // Creates a single creep with the given role and work
-var	createCreep = function(roleTyp, counter, work){
+function createCreep(roleTyp, counter, work){
     var exisitingCreeps = _.filter(Game.creeps, (creep) => creep.memory.role == roleTyp);       
     console.log("Creep "+roleTyp+" count "+exisitingCreeps.length);
     if(exisitingCreeps.length < counter) {
@@ -113,7 +108,7 @@ var	createCreep = function(roleTyp, counter, work){
 }
 
 // Cleans the memory from dead creeps.
-var	clean = function(){
+function clean(){
 	for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
