@@ -8,7 +8,7 @@ var roleRepair = {
 			var item = structures[i];							
 			console.log("Repair "+item.id +" hits="+item.hits+" max="+item.hitsMax);
 			if (!creep.pos.isNearTo(item)) {
-				creep.moveTo(target);
+				creep.moveTo(item);
 			} else {
 				creep.repair(item)
 			}
