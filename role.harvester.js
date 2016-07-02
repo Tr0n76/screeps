@@ -13,7 +13,7 @@ var roleHarvester = {
     		}
     	}
     	
-    	var targets = getTargetsForEnergyTransfer();
+    	var targets = getTargetsForEnergyTransfer(creep);
 		
         if(targets.length > 0) {
         	
