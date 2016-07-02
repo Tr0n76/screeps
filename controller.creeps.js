@@ -2,6 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleGuard = require('role.guard');
+var roleRepair = require('role.repair');
 
 module.exports = {
 
@@ -27,6 +28,9 @@ function setRoleForCreep(creep){
     }
     if(creep.memory.role == 'builder') {
         roleBuilder.run(creep,  getSourceForCreep(creep));
+    }
+    if(creep.memory.role == 'repair') {
+        roleRepair.run(creep);
     }
     if(creep.memory.role == 'guard') {
         roleGuard.run(creep);
@@ -96,6 +100,9 @@ function create() {
 		return;
 	}
 	if(createCreep('builder', 2, [WORK, CARRY, CARRY, CARRY, MOVE])){
+		return;
+	}
+	if(createCreep('repair', 2, [WORK, CARRY, MOVE, MOVE, MOVE])){
 		return;
 	}
 	if(createCreep('guard', 4, [ATTACK, ATTACK, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH])){
