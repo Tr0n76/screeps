@@ -1,10 +1,9 @@
 var roleHarvester = {
 
     run: function(creep, source) {
-    	
     	setHarvestFlagForCreep(creep)
     	
-    	console.log("Harvester "+creep.name+" is harvesting "+creep.memory.harvesting +" energy "+creep.carry.energy+" max "+creep.carryCapacity);
+    	console.log("Harvester "+creep.name+" harvesting "+ creep.memory.harvesting+ " ernergy "+creep.carry.energy);
     	
     	if (creep.memory.harvesting) { 
     		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {  	    		
@@ -35,14 +34,13 @@ function getTargetsForEnergyTransfer(creep){
 }
 
 function setHarvestFlagForCreep(creep){	
-	if (creep.carry.energy == 0){
+    
+	if (creep.carry.energy === 0){
 		 creep.memory.harvesting = true;
-		 return;
 	}
 		
-	if (creep.carry.energy == creep.carryCapacity){
+	if (creep.carry.energy === creep.carryCapacity){
 		 creep.memory.harvesting = false;
-		 return;
 	}	
 }
 
