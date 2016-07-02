@@ -109,8 +109,7 @@ function createCreep(roleTyp, counter, work){
     var exisitingCreeps = _.filter(Game.creeps, (creep) => creep.memory.role == roleTyp);          
     if(exisitingCreeps.length < counter) {
         var newName = Game.spawns.Spawn1.createCreep(work, undefined, {role: roleTyp});
-        if (newName<0){
-        	console.log("Waiting for creating new creep with role "+roleTyp);
+        if (newName<0){  
         	return true;
         }
         console.log('Spawning new creep for role '+roleTyp+' with name ' + newName);
