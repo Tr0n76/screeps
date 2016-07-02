@@ -1,6 +1,6 @@
 var roleRepair = {
 
-	run : function(creep) {
+	run : function(creep, source) {
 		
 		setHarvestFlagForCreep(creep)
     	

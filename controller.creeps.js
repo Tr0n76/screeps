@@ -30,7 +30,7 @@ function setRoleForCreep(creep){
         roleBuilder.run(creep,  getSourceForCreep(creep));
     }
     if(creep.memory.role == 'repair') {
-        roleRepair.run(creep);
+        roleRepair.run(creep, getSourceForCreep(creep));
     }
     if(creep.memory.role == 'guard') {
         roleGuard.run(creep);
