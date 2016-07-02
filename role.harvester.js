@@ -2,7 +2,7 @@ var roleHarvester = {
 
     run: function(creep, source) {
     	
-    	harvestEnergy(creep)
+    	setHarvestFlagForCreep(creep)
     	
     	console.log("Harvester "+creep.name+" is harvesting "+creep.memory.harvesting);
     	
