@@ -4,7 +4,7 @@ var roleHarvester = {
     	
     	setHarvestFlagForCreep(creep)
     	
-    	console.log("Harvester "+creep.name+" is harvesting "+creep.memory.harvesting);
+    	console.log("Harvester "+creep.name+" is harvesting "+creep.memory.harvesting +" energy "+creep.carry.energy+" max "+creep.carryCapacity);
     	
     	if (creep.memory.harvesting) { 
     		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {    	
