@@ -102,7 +102,7 @@ function create() {
 	if(createCreep('builder', 2, [WORK, WORK, CARRY, CARRY, CARRY, MOVE])){
 		return;
 	}
-	if(createCreep('repair', 2, [WORK, CARRY, CARRY, MOVE, MOVE, MOVE])){
+	if(createCreep('repair', 1, [WORK, CARRY, CARRY, MOVE, MOVE, MOVE])){
 		return;
 	}
 	if(createCreep('guard', 4, [ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH])){
