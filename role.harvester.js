@@ -8,18 +8,17 @@ var roleHarvester = {
     	
     	if (creep.memory.harvesting) { 
     		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {  	    		
-    			creep.moveTo(source);
-    			return;
+    			creep.moveTo(source);    			
     		}
-    	}
-    	
-    	var targets = getTargetsForEnergyTransfer(creep);
-		
-        if(targets.length > 0) {
-        	
-            if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(targets[0]);
-            }
+    	}else{    	
+	    	var targets = getTargetsForEnergyTransfer(creep);
+			
+	        if(targets.length > 0) {
+	        	
+	            if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+	                creep.moveTo(targets[0]);
+	            }
+	        }
         }
     }	           
 }
