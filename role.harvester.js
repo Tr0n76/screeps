@@ -25,7 +25,7 @@ var roleHarvester = {
 }
 
 
-function getTargetsForEnergyTransfer(){
+function getTargetsForEnergyTransfer(creep){
 	return creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
             return (structure.structureType == STRUCTURE_EXTENSION ||
