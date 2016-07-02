@@ -95,7 +95,7 @@ function create() {
 	if(createCreep('upgrader', 4, [WORK, WORK, CARRY, MOVE])){
 		return;
 	}
-	if(createCreep('builder', 6, [WORK, CARRY, CARRY, CARRY, MOVE])){
+	if(createCreep('builder', 2, [WORK, CARRY, CARRY, CARRY, MOVE])){
 		return;
 	}
 	if(createCreep('guard', 4, [ATTACK, ATTACK, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH])){
