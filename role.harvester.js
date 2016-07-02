@@ -3,7 +3,7 @@ var roleHarvester = {
     run: function(creep, source) {
       
 
-	    if(creep.carry.energy < creep.carryCapacity) {
+	    if(creep.carry.energy == 0) {
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source);
             }
