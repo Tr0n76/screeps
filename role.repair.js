@@ -11,12 +11,9 @@ var roleRepair = {
     	}else{    	
 			var structures = getTargetsForRepair(creep);
 	
-			console.log(structures.length);
-	
 			for (var i=0;i<structures.length;i++){
 				var item = structures[i];	
-				
-				console.log("Repair "+item.id +" hits="+item.hits+" max="+item.hitsMax +" Type "+item.structureType);
+
 				if (!creep.pos.isNearTo(item)) {
 					creep.moveTo(item);
 				} else {
