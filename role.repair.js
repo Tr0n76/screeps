@@ -2,8 +2,8 @@ var roleRepair = {
 
 	run : function(creep) {
 
-		var structures = creep.room.find(FIND_MY_STRUCTURES);		
-		
+		var structures = getTargetsForRepair(creep);
+
 		for (var i=0;i<structures.length;i++){
 			var item = structures[i];	
 			
