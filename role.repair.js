@@ -3,10 +3,11 @@ var roleRepair = {
 	run : function(creep) {
 
 		var structures = creep.room.find(FIND_MY_STRUCTURES);		
-					
+		
 		for (var i=0;i<structures.length;i++){
-			var item = structures[i];							
-			console.log("Repair "+item.id +" hits="+item.hits+" max="+item.hitsMax);
+			var item = structures[i];	
+			
+			console.log("Repair "+item.id +" hits="+item.hits+" max="+item.hitsMax +" Type "+item.structureType);
 			if (!creep.pos.isNearTo(item)) {
 				creep.moveTo(item);
 			} else {
@@ -22,8 +23,7 @@ function getTargetsForRepair(creep){
             return (structure.structureType == STRUCTURE_EXTENSION ||
                     structure.structureType == STRUCTURE_SPAWN ||
                     structure.structureType == STRUCTURE_TOWER ||
-                    structure.structureType ==  STRUCTURE_ROAD) 
-                    && structure.hits < structure.hits.max;
+                    structure.structureType ==  STRUCTURE_ROAD);
         }
 	});
 }
