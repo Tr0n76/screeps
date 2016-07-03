@@ -31,7 +31,8 @@ function getTargetsForRepair(creep){
                     structure.structureType === STRUCTURE_SPAWN ||
                     structure.structureType === STRUCTURE_TOWER ||
                     structure.structureType ===  STRUCTURE_ROAD ||    
-                    structure.structureType ===  STRUCTURE_WALL) && (structure.hits < structure.hitsMax);
+                    structure.structureType ===  STRUCTURE_WALL ||
+                    structure.structureType ===  STRUCTURE_RAMPART) && (structure.hits < structure.hitsMax);
         }
 	});
 }
