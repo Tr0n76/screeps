@@ -48,14 +48,15 @@ function setBuildFlagForCreep(creep){
 }
 
 
-function getTargetsForRepair(creep){
-	for (var i ; i<creep.memory.targetsForRepair.length;i++){
-		if (item[i].hits==item[i].hitsMax){
-			delete creep.memory.targetsForRepair[i];
-		}
-	}
-	
-	
+function getTargetsForRepair(creep){	
+	 if (creep.memory.targetsForRepair){
+    	for (var i ; i<creep.memory.targetsForRepair.length;i++){
+    		if (item[i].hits==item[i].hitsMax){
+    			delete creep.memory.targetsForRepair[i];   
+    		}
+    	}
+	 }
+		
 	if (!creep.memory.targetsForRepair){
 		creep.memory.targetsForRepair = creep.room.find(FIND_STRUCTURES, {
 	        filter: (structure) => {
