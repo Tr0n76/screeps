@@ -1,3 +1,4 @@
+var repairList = null;
 var roleBuilder = {
 
     /** @param {Creep} creep **/
@@ -50,8 +51,8 @@ function setBuildFlagForCreep(creep){
 
 function getTargetsForRepair(creep){	
 	
-	if ((!creep.memory.targetsForRepair)||(creep.memory.targetsForRepair.length===0)){
-		creep.memory.targetsForRepair = creep.room.find(FIND_STRUCTURES, {
+	if ((!repairList)||(repairList.length===0)){
+		repairList = creep.room.find(FIND_STRUCTURES, {
 	        filter: (structure) => {
 	            return (structure.structureType === STRUCTURE_EXTENSION ||
 	                    structure.structureType === STRUCTURE_SPAWN ||
@@ -61,16 +62,16 @@ function getTargetsForRepair(creep){
 	                    structure.structureType ===  STRUCTURE_RAMPART) && (structure.hits < structure.hitsMax);
 	        }
 		});
-		return creep.memory.targetsForRepair;
+		return repairList;
 	}
 			
-	for (var i ; i<creep.memory.targetsForRepair.length;i++){
+	for (var i ; i<repairList.length;i++){
 		if (item[i].hits==item[i].hitsMax){
-			creep.memory.targetsForRepair.splice[i];
+			repairList.splice[i];
 		}
 	}
 	
-	return creep.memory.targetsForRepair;
+	return repairList;
  }
 		
 
