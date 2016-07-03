@@ -1,4 +1,4 @@
-var repairList = null;
+
 var roleBuilder = {
 
     /** @param {Creep} creep **/
@@ -36,6 +36,8 @@ var roleBuilder = {
 	    }
 	}
 };
+
+var repairList = null;
 
 function setBuildFlagForCreep(creep){	
     
