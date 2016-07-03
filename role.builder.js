@@ -3,12 +3,7 @@ var roleBuilder = {
     /** @param {Creep} creep **/
     run: function(creep, source) {
 
-	    if(creep.memory.building && creep.carry.energy == 0) {
-            creep.memory.building = false;
-	    }
-	    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-	        creep.memory.building = true;
-	    }
+    	setBuildFlagForCreep(creep);
 
 	    if(creep.memory.building) {
 	        var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
@@ -16,6 +11,18 @@ var roleBuilder = {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0]);
                 }
+            }else{
+            	var structures = getTargetsForRepair(creep);
+            	
+    			for (var i=0;i<structures.length;i++){
+    				var item = structures[i];	
+
+    				if (!creep.pos.isNearTo(item)) {
+    					creep.moveTo(item);
+    				} else {
+    					creep.repair(item)
+    				}
+    			}
             }
 	    }
 	    else {	     
@@ -25,5 +32,29 @@ var roleBuilder = {
 	    }
 	}
 };
+
+function setBuildFlagForCreep(creep){	
+    
+    if(creep.memory.building && creep.carry.energy == 0) {
+        creep.memory.building = false;
+    }
+    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
+        creep.memory.building = true;
+    }
+
+}
+
+function getTargetsForRepair(creep){
+	return creep.room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return (structure.structureType === STRUCTURE_EXTENSION ||
+                    structure.structureType === STRUCTURE_SPAWN ||
+                    structure.structureType === STRUCTURE_TOWER ||
+                    structure.structureType ===  STRUCTURE_ROAD ||    
+                    structure.structureType ===  STRUCTURE_WALL ||
+                    structure.structureType ===  STRUCTURE_RAMPART) && (structure.hits < structure.hitsMax);
+        }
+	});
+}
 
 module.exports = roleBuilder;
