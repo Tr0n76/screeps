@@ -96,10 +96,10 @@ function create() {
 	if (createCreep('harvester', 6, [WORK, WORK, WORK, CARRY, CARRY,  MOVE, MOVE])){
 		return;
 	}
-	if(createCreep('upgrader', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE])){
+	if(createCreep('upgrader', 2, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE])){
 		return;
 	}
-	if(createCreep('builder', 6, [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
+	if(createCreep('builder', 4, [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}	
 	if(createCreep('guard', 2, [ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH])){
