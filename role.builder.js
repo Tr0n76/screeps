@@ -50,7 +50,7 @@ function getTargetsForRepair(creep){
             return (structure.structureType === STRUCTURE_EXTENSION ||
                     structure.structureType === STRUCTURE_SPAWN ||
                     structure.structureType === STRUCTURE_TOWER ||
-                    structure.structureType ===  STRUCTURE_ROAD ||    
+                    ((structure.structureType ===  STRUCTURE_ROAD) && (structure.hits < (structure.hitsMax/4)))||    
                     structure.structureType ===  STRUCTURE_WALL ||
                     structure.structureType ===  STRUCTURE_RAMPART) && (structure.hits < structure.hitsMax);
         }
