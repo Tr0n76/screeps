@@ -140,10 +140,12 @@ function clean(){
 
 function isEmergencyCreepCreation(){
 	var counter = 0;
-	for(var creep in Game.creeps){
-	    if(creep.memory.role === 'harvester'){
-	       counter++;
-	    }
+	for(var creep in Game.creeps){	
+		if(creep.memory.role){
+		    if (creep.memory.role === 'harvester'){
+		       counter++;
+		    }
+		}
 	}
 	
 	if (counter<=5){
