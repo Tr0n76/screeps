@@ -50,7 +50,6 @@ function setBuildFlagForCreep(creep){
 
 }
 
-
 function getTargetsForRepair(creep){	
 	
 	if ((!repairList)||(repairList.length===0)){
