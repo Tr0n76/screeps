@@ -154,7 +154,7 @@ function isEmergencyCreepCreation(){
 		return true;
 	}
 	
-	if (counter<=5){
+	if (counter<5){
 		return true;
 	}
 	return false;
