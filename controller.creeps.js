@@ -8,7 +8,7 @@ module.exports = {
 
     run: function() {
     	
-    	var creeps =Game.creeps
+    	var creeps = Game.creeps; 
     	
     	create(creeps);
     	
