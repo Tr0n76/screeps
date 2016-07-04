@@ -93,8 +93,7 @@ function create(creps) {
 	
 	clean();
 	
-	if (isEmergencyCreepCreation()){
-	    console.log("Emergency creep creation.");
+	if (isEmergencyCreepCreation()){	 
 		if (createCreep('harvester', 8, [WORK, WORK, CARRY, MOVE])){
 			return;
 		}
@@ -155,7 +154,7 @@ function isEmergencyCreepCreation(){
 	}
 	
 	if (counter<5){
-		console.log("Emergency harvesters");
+		console.log("Emergency harvesters count "+counter);
 		return true;
 	}
 	return false;
