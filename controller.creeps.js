@@ -155,6 +155,7 @@ function isEmergencyCreepCreation(){
 	}
 	
 	if (counter<5){
+		console.log("Emergency harvesters");
 		return true;
 	}
 	return false;
