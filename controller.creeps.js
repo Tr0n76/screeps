@@ -7,12 +7,10 @@ var roleRepair = require('role.repair');
 module.exports = {
 
     run: function() {
+    	        	
+    	create();
     	
-    	var creeps = Game.creeps; 
-    	
-    	create(creeps);
-    	
-        for(var name in creeps) {	    	
+        for(var name in Game.creeps) {	    	
 	    	var creep = Game.creeps[name];
 	    	setRoleForCreep(creep);
 	    }     
@@ -91,11 +89,11 @@ function getSourceForCreep(creep){
 } 
 
 // Creating all the creeps.
-function create(creeps) {
+function create(creps) {
 	
 	clean();
 	
-	if (creeps.length===0){
+	if (isEmergencyCreepCreation()){
 		if (createCreep('harvester', 8, [WORK, WORK, CARRY, MOVE])){
 			return;
 		}
@@ -138,4 +136,18 @@ function clean(){
             console.log('Clearing dead creep memory:', name);
         }
     }
+}
+
+function isEmergencyCreepCreation(){
+	var counter = 0;
+	for(var creep in Game.creeps){
+	    if(creep.memory.role === 'harvester'){
+	       counter++;
+	    }
+	}
+	
+	if (counter<=5){
+		return true;
+	}
+	return false;
 }
