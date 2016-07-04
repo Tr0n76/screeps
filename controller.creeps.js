@@ -94,6 +94,7 @@ function create(creps) {
 	clean();
 	
 	if (isEmergencyCreepCreation()){
+	    console.log("Emergency creep creation.");
 		if (createCreep('harvester', 8, [WORK, WORK, CARRY, MOVE])){
 			return;
 		}
@@ -141,14 +142,14 @@ function clean(){
 function isEmergencyCreepCreation(){
 	var counter = 0;
 	try{
-	for(var creep in Game.creeps){
-		
-		if(creep.memory.role){
-		    if (creep.memory.role === 'harvester'){
-		       counter++;
-		    }
-		}
-	}
+    	for(var name in Game.creeps){
+    		var creep = Game.creeps[name];
+    		if(creep.memory.role){
+    		    if (creep.memory.role === 'harvester'){
+    		       counter++;
+    		    }
+    		}
+    	}
 	}catch(exception){
 		return true;
 	}
