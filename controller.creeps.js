@@ -114,6 +114,7 @@ function create(creps) {
            
 }
 
+
 // Creates a single creep with the given role and work
 function createCreep(roleTyp, counter, work){
     var exisitingCreeps = _.filter(Game.creeps, (creep) => creep.memory.role == roleTyp);          
