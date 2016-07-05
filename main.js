@@ -1,13 +1,12 @@
 
 var controllerCreeps = require('controller.creeps');
-var roleTower = require('role.tower');
+var controllerTower = require('controller.tower');
 
 
 module.exports.loop = function(){
 	
-	   controllerCreeps.run();
-	   
-	   roleTower.run();
+	   controllerCreeps.run();	   
+	   controllerTower.run();
 	   
 }
 

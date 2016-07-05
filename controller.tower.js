@@ -5,7 +5,7 @@ module.exports = {
 
 	run : function() {
 
-		for(var name in Game.rooms) {	    	
+		for(var name in Game.rooms) {				
 			defendRoom(name);	    
 	    } 
 		
