@@ -8,7 +8,10 @@ module.exports = {
 
     run: function() {
     	        	
-    	create();
+    	if (Game.time % 10 === 0){
+    		console.log("Check for creep creation.")
+    		create();
+    	}
     	
         for(var name in Game.creeps) {	    	
 	    	var creep = Game.creeps[name];
