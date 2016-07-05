@@ -2,31 +2,33 @@ module.exports  = {
 
 	run : function(creep, source) {
 		
-		setRepairFlagForCreep(creep)
+		setRepairFlagForCreep(creep);
+		
     	
     	if (creep.memory.repair) {     		    
 			var structures = getTargetsForRepair(creep);
-	
-			for (var i=0;i<structures.length;i++){
-				var item = structures[i];	
-
-				if (!creep.pos.isNearTo(item)) {
-					creep.moveTo(item);
-				} else {
-					creep.repair(item)
-				}
+			var item = structures[0];
+			console.log(creep.name +" is repairing "+ item.structureType+" id "+item.id+" "+item.hits+"/"+item.hitsMax);
+			if (!creep.pos.isNearTo(item)) {
+				creep.moveTo(item);
+			} else {
+				creep.repair(item);
 			}
+    	}else{
+    		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {  	    		
+    			creep.moveTo(source);    			
+    		}
     	}
-		
-		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {  	    		
-			creep.moveTo(source);    			
-		}
 	}
 }
 
 var repairList = null;
 
 function setRepairFlagForCreep(creep){	
+    
+    if (!creep.memory.repair){
+        creep.memory.repair=false;
+    }
     
     if(creep.memory.repair && creep.carry.energy == 0) {
         creep.memory.repair = false;
@@ -45,14 +47,12 @@ function getTargetsForRepair(creep){
 						return (structure.structureType === STRUCTURE_EXTENSION ||
 	                    structure.structureType === STRUCTURE_SPAWN ||
 	                    structure.structureType === STRUCTURE_TOWER ||
-	                    ((structure.structureType ===  STRUCTURE_ROAD) && (structure.hits < (structure.hitsMax/4)))||    
+	                    ((structure.structureType ===  STRUCTURE_ROAD) && (structure.hits < (structure.hitsMax)))||    
 	                    structure.structureType ===  STRUCTURE_WALL ||
 	                    structure.structureType ===  STRUCTURE_RAMPART) && (structure.hits < structure.hitsMax);
 	        }
 		});
 	}
-	
-	console.log("Targets for repair : "+targets.length);
 	
 	return targets;
  }
