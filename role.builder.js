@@ -1,5 +1,7 @@
 
-var roleBuilder = {
+var roleRepair = require('role.repair');
+
+module.exports = {
 
     /** @param {Creep} creep **/
     run: function(creep, source) {
@@ -12,21 +14,6 @@ var roleBuilder = {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0]);
                 }
-            }else{
-            	var structures = getTargetsForRepair(creep);
-            	
-    			for (var i=0;i<structures.length;i++){
-    				var item = structures[i];	
-    				if (!item){
-    					continue;
-    				}
-
-    				if (!creep.pos.isNearTo(item)) {
-    					creep.moveTo(item);
-    				} else {
-    					creep.repair(item)
-    				}
-    			}
             }
 	    }
 	    else {	     
@@ -36,8 +23,6 @@ var roleBuilder = {
 	    }
 	}
 };
-
-var repairList = null;
 
 function setBuildFlagForCreep(creep){	
     
@@ -50,30 +35,3 @@ function setBuildFlagForCreep(creep){
 
 }
 
-function getTargetsForRepair(creep){	
-	
-	if ((!repairList)||(repairList.length===0)){
-		repairList = creep.room.find(FIND_STRUCTURES, {
-	        filter: (structure) => {
-	            return (structure.structureType === STRUCTURE_EXTENSION ||
-	                    structure.structureType === STRUCTURE_SPAWN ||
-	                    structure.structureType === STRUCTURE_TOWER ||
-	                    ((structure.structureType ===  STRUCTURE_ROAD) && (structure.hits < (structure.hitsMax/4)))||    
-	                    structure.structureType ===  STRUCTURE_WALL ||
-	                    structure.structureType ===  STRUCTURE_RAMPART) && (structure.hits < structure.hitsMax);
-	        }
-		});
-		return repairList;
-	}
-			
-	for (var i ; i<repairList.length;i++){
-		if (item[i].hits==item[i].hitsMax){
-			repairList.splice[i];
-		}
-	}
-	
-	return repairList;
- }
-		
-
-module.exports = roleBuilder;
