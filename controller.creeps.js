@@ -105,13 +105,13 @@ function create(creps) {
 	if(createCreep('upgrader', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE])){
 		return;
 	}
-	if(createCreep('repair', 3, [WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
+	if(createCreep('repair', 4, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}	
-	if(createCreep('builder', 3, [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE])){
+	if(createCreep('builder', 3, [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE])){
 		return;
 	}	
-	if(createCreep('guard', 3, [ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH])){
+	if(createCreep('guard', 3, [ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH])){
 		return;
 	}          
 }
