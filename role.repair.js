@@ -29,8 +29,11 @@ function getTargetWithMostNeedForRepair(structures){
 		var hitsDiffMax = mostNeedForRepair.hitsMax - mostNeedForRepair.hits;
 		var hitsDiffTmp = item.hitsMax - item.hits;
 		
-		if ((hitsDiffMax < hitsDiffTmp)&&(item.structureType !==  STRUCTURE_WALL)){
-			mostNeedForRepair =  item;
+		var isWallAndNeedRepair = ((item.structureType ===  STRUCTURE_WALL) && (item.hits<(item.hitsMax/100))); 
+		if ((hitsDiffMax < hitsDiffTmp)){
+			if ((item.structureType !==  STRUCTURE_WALL) || isWallAndNeedRepair){
+				mostNeedForRepair =  item;
+			}
 		}			
 	}
 	console.log(mostNeedForRepair.structureType+" has "+mostNeedForRepair.hits+ " from "+mostNeedForRepair.hitsMax);	
@@ -60,7 +63,7 @@ function getTargetsForRepair(creep){
 						return (structure.structureType === STRUCTURE_EXTENSION ||
 	                    structure.structureType === STRUCTURE_SPAWN ||
 	                    structure.structureType === STRUCTURE_TOWER ||
-	                    ((structure.structureType ===  STRUCTURE_ROAD) && (structure.hits < (structure.hitsMax)))||    
+	                    structure.structureType ===  STRUCTURE_ROAD ||    
 	                    structure.structureType ===  STRUCTURE_WALL ||
 	                    structure.structureType ===  STRUCTURE_RAMPART) && (structure.hits < structure.hitsMax);
 	        }
