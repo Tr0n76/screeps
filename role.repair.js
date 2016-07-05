@@ -33,7 +33,7 @@ function getTargetWithMostNeedForRepair(structures){
 			mostNeedForRepair =  item;
 		}			
 	}
-	console.log(mostNeedForRepair.structureType+" has "+mostNeedForRepair.hits+ " from "+mostNeedForRepair.maxHits);	
+	console.log(mostNeedForRepair.structureType+" has "+mostNeedForRepair.hits+ " from "+mostNeedForRepair.hitsMax);	
 }
 
 function setRepairFlagForCreep(creep){	
