@@ -36,7 +36,7 @@ function getTargetWithMostNeedForRepair(structures){
 			}
 		}			
 	}
-	console.log(mostNeedForRepair.structureType+" has "+mostNeedForRepair.hits+ " from "+mostNeedForRepair.hitsMax);	
+	
 	return mostNeedForRepair;
 }
 
