@@ -7,7 +7,7 @@ module.exports  = {
     	
     	if (creep.memory.repair) {     		    
 			var structures = getTargetsForRepair(creep);
-			var item = structures[0];
+			var item = getTargetWithMostNeedForRepair(structures);
 		
 			if (!creep.pos.isNearTo(item)) {
 				creep.moveTo(item);
@@ -22,7 +22,19 @@ module.exports  = {
 	}
 }
 
-var repairList = null;
+function getTargetWithMostNeedForRepair(structures){
+	var mostNeedForRepair = structures[0];
+	for (var i=0; i<structures.length;i++){
+		var item = structures[i];
+		var hitsDiffMax = mostNeedForRepair.hitsMax - mostNeedForRepair.hits;
+		var hitsDiffTmp = item.hitsMax - item.hits;
+		
+		if (hitsDiffMax < hitsDiffTmp){
+			mostNeedForRepair =  item;
+		}			
+	}
+	console.log(mostNeedForRepair.structureType+" has "+mostNeedForRepair.hits+ " from "+mostNeedForRepair.maxHits);	
+}
 
 function setRepairFlagForCreep(creep){	
     
