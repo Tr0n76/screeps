@@ -8,7 +8,7 @@ module.exports  = {
     	if (creep.memory.repair) {     		    
 			var structures = getTargetsForRepair(creep);
 			var item = structures[0];
-			console.log(creep.name +" is repairing "+ item.structureType+" id "+item.id+" "+item.hits+"/"+item.hitsMax);
+		
 			if (!creep.pos.isNearTo(item)) {
 				creep.moveTo(item);
 			} else {
