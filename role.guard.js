@@ -1,17 +1,17 @@
-var roleGuard = {
+module.exports = {
 
 	run : function(creep) {
 
 		var hostiles = creep.room.find(FIND_HOSTILE_CREEPS);
-		var hostile = hostiles[0];
-		if (hostile) {
+		if (hostiles.length>0) {
+			var target = hostiles[0];
 			if (!creep.pos.isNearTo(target)) {
 				creep.moveTo(target);
-				console.log("Hostile creep from user " + hositle.owner.username
+				console.log("Hostile creep from user " + target.owner.username
 						+ " spottet. Moving to engange.");
 			} else {
 				creep.attack(target);
-				console.log("Hostile creep from user " + hositle.owner.username
+				console.log("Hostile creep from user " + target.owner.username
 						+ " spottet. Attakinge.");
 			}
 		} else {
@@ -20,4 +20,3 @@ var roleGuard = {
 	}
 }
 
-module.exports = roleGuard;
