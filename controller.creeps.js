@@ -111,7 +111,7 @@ function create(creps) {
 	if(createCreep('builder', 2, [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE])){
 		return;
 	}	
-	if(createCreep('guard', , [ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH])){
+	if(createCreep('guard', 2, [ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH])){
 		return;
 	}          
 }
