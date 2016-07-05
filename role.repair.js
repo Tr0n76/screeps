@@ -28,9 +28,9 @@ function getTargetWithMostNeedForRepair(structures){
 		var item = structures[i];
 		var hitsDiffMax = mostNeedForRepair.hitsMax - mostNeedForRepair.hits;
 		var hitsDiffTmp = item.hitsMax - item.hits;
-		
-		var isWallAndNeedRepair = ((item.structureType ===  STRUCTURE_WALL) && (item.hits<(item.hitsMax/100))); 
+				
 		if ((hitsDiffMax < hitsDiffTmp)){
+			var isWallAndNeedRepair = ((item.structureType ===  STRUCTURE_WALL) && (item.hits<((item.hitsMax/100)*5))); 
 			if ((item.structureType !==  STRUCTURE_WALL) || isWallAndNeedRepair){
 				mostNeedForRepair =  item;
 			}
