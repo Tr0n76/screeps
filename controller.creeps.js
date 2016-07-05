@@ -99,7 +99,7 @@ function create(creps) {
 		}
 	}
 	
-	if (createCreep('harvester', 6, [WORK, WORK, WORK, CARRY, CARRY,  MOVE, MOVE])){
+	if (createCreep('harvester', 6, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}
 	if(createCreep('upgrader', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE])){
