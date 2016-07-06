@@ -8,8 +8,7 @@ module.exports = {
 
     run: function() {
     	        	
-    	if (Game.time % 10 === 0){
-    		console.log("Check for creep creation.")
+    	if (Game.time % 10 === 0){    		
     		create();
     	}
     	
@@ -114,7 +113,7 @@ function create(creps) {
 	if(createCreep('builder', 2, [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE])){
 		return;
 	}	
-	if(createCreep('guard', 2, [ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH])){
+	if(createCreep('guard', 4, [ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH])){
 		return;
 	}          
 }

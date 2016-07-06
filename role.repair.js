@@ -7,6 +7,7 @@ module.exports  = {
     	
     	if (creep.memory.repair) {     		    
 			var structures = getTargetsForRepair(creep);
+			clearRepairList(structures);
 			var item = getTargetWithMostNeedForRepair(structures);
 		
 			if (!creep.pos.isNearTo(item)) {
@@ -56,9 +57,10 @@ function setRepairFlagForCreep(creep){
 }
 
 function getTargetsForRepair(creep){	
-	var targets = Memory.targetsForRepair;	
+	var targets = Game.getObjectById(Memory.targetsForRepair);
 	
-	if ((!Memory.targetsForRepair)||(Memory.targetsForRepair.length===0)){
+	
+	if ((!targets)||(targets.length===0)){
 		targets = creep.room.find(FIND_STRUCTURES, {filter: (structure) => {	           
 						return (structure.structureType === STRUCTURE_EXTENSION ||
 	                    structure.structureType === STRUCTURE_SPAWN ||
@@ -70,14 +72,19 @@ function getTargetsForRepair(creep){
 		});
 	}
 	
+	
+	Memory.targetsForRepair = targets;
+	
 	return targets;
  }
 
 function clearRepairList(targets){
-	for (var i ; i<repairList.length;i++){
-		if (item[i].hits==item[i].hitsMax){
-			repairList.splice[i];
+	for (var i ; i<targets.length;i++){
+	    var item = targets[i];
+		if (item.hits==item.hitsMax){
+			targets.splice[i];
 		}
 	}
+	Memory.targetsForRepair = targets;
 }
 
