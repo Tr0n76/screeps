@@ -9,11 +9,12 @@ module.exports  = {
 			var structures = getTargetsForRepair(creep);
 			clearRepairList(structures);
 			var item = getTargetWithMostNeedForRepair(structures);
-		
+			
 			if (!creep.pos.isNearTo(item)) {
 				creep.moveTo(item);
 			} else {
 				creep.repair(item);
+				console.log("Repair "+item.structureType+" "+item.hits);
 			}
     	}else{
     		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {  	    		
@@ -27,14 +28,11 @@ function getTargetWithMostNeedForRepair(structures){
 	var mostNeedForRepair = structures[0];
 	for (var i=0; i<structures.length;i++){
 		var item = structures[i];
-		var hitsDiffMax = mostNeedForRepair.hitsMax - mostNeedForRepair.hits;
-		var hitsDiffTmp = item.hitsMax - item.hits;
-				
-		if ((hitsDiffMax < hitsDiffTmp)){
-			var isWallAndNeedRepair = ((item.structureType ===  STRUCTURE_WALL) && (item.hits<((item.hitsMax/100)*5))); 
-			if ((item.structureType !==  STRUCTURE_WALL) || isWallAndNeedRepair){
-				mostNeedForRepair =  item;
-			}
+		var hitsDiff = mostNeedForRepair.hits - item.hits;
+		var isWallAndNeedRepair = ((item.structureType ===  STRUCTURE_WALL) && (item.hits<((item.hitsMax/100000)*1))); 
+	
+		if ((hitsDiff>0)||isWallAndNeedRepair){
+    		mostNeedForRepair =  item;
 		}			
 	}
 	
@@ -57,11 +55,8 @@ function setRepairFlagForCreep(creep){
 }
 
 function getTargetsForRepair(creep){	
-	var targets = Game.getObjectById(Memory.targetsForRepair);
-	
-	
-	if ((!targets)||(targets.length===0)){
-		targets = creep.room.find(FIND_STRUCTURES, {filter: (structure) => {	           
+
+		return creep.room.find(FIND_STRUCTURES, {filter: (structure) => {	           
 						return (structure.structureType === STRUCTURE_EXTENSION ||
 	                    structure.structureType === STRUCTURE_SPAWN ||
 	                    structure.structureType === STRUCTURE_TOWER ||
@@ -70,12 +65,6 @@ function getTargetsForRepair(creep){
 	                    structure.structureType ===  STRUCTURE_RAMPART) && (structure.hits < structure.hitsMax);
 	        }
 		});
-	}
-	
-	
-	Memory.targetsForRepair = targets;
-	
-	return targets;
  }
 
 function clearRepairList(targets){
