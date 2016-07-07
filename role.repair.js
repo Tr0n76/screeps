@@ -14,7 +14,7 @@ module.exports  = {
 				creep.moveTo(item);
 			} else {
 				creep.repair(item);
-				console.log("Repair "+item.structureType+" "+item.hits);
+				console.log("Repair through creep "+creep.name+" "+item.structureType+" "+item.hits);
 			}
     	}else{
     		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {  	    		
@@ -29,9 +29,8 @@ function getTargetWithMostNeedForRepair(structures){
 	for (var i=0; i<structures.length;i++){
 		var item = structures[i];
 		var hitsDiff = mostNeedForRepair.hits - item.hits;
-		var isWallAndNeedRepair = ((item.structureType ===  STRUCTURE_WALL) && (item.hits<((item.hitsMax/100000)*1))); 
 	
-		if ((hitsDiff>0)||isWallAndNeedRepair){
+		if (hitsDiff>0){
     		mostNeedForRepair =  item;
 		}			
 	}
