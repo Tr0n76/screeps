@@ -49,9 +49,7 @@ function setRepairFlagForCreep(creep){
     }
     if(!creep.memory.repair && creep.carry.energy == creep.carryCapacity) {
         creep.memory.repair = true;
-    }   
-    
-
+    }       
 }
 
 function getTargetsForRepair(creep){	
