@@ -3,18 +3,15 @@
 	
 module.exports = {
 
-	run : function() {
-
-		for(var name in Game.rooms) {				
-			defendRoom(name);	    
-	    } 
+	run : function(room) {
 		
+		defendRoom(name);	    	 	
 	}
 }
 	
-function defendRoom(roomName) {
+function defendRoom(room) {
     
-    var hostiles = Game.rooms[roomName].find(FIND_HOSTILE_CREEPS);
+    var hostiles = room.find(FIND_HOSTILE_CREEPS);
     
     if(hostiles.length > 0) {
         var username = hostiles[0].owner.username;
