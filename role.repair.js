@@ -63,10 +63,8 @@ function getTargetWithMostNeedForRepair(structures){
     		}			
     	}
     	mostNeedForRepair.room.memory.targetForRepairId = mostNeedForRepair.id;
-    }
-	var target = Game.getObjectById(structures[0].room.memory.targetForRepairId);
-	console.log(target.id+" "+target.structureType+" "+target.hits+"/"+target.hitsMax);
-	return target;
+    }	
+	return Game.getObjectById(structures[0].room.memory.targetForRepairId);	
 }
 
 function setRepairFlagForCreep(creep){	
