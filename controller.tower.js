@@ -5,7 +5,7 @@ module.exports = {
 
 	run : function(room) {
 		
-		defendRoom(name);	    	 	
+		defendRoom(room);	    	 	
 	}
 }
 	
