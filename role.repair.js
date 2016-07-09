@@ -24,18 +24,43 @@ module.exports  = {
 	}
 }
 
-function getTargetWithMostNeedForRepair(structures){
-	var mostNeedForRepair = structures[0];
-	for (var i=0; i<structures.length;i++){
-		var item = structures[i];
-		var hitsDiff = mostNeedForRepair.hits - item.hits;
-	
-		if (hitsDiff>0){
-    		mostNeedForRepair =  item;
-		}			
+function selectNewTarget(){
+	var actualTargetId = mostNeedForRepair.room.memory.targetForRepair;
+	if (!actualTargetId)
+	{
+		return true;
 	}
 	
-	return mostNeedForRepair;
+	var actualTarget = Game.getObjectById(mostNeedForRepair.room.memory.targetForRepair);
+	if (actualTarget){
+		return true;
+	}
+	
+	if (actualTarget.hits  == actualTarget.hitsMax){
+		return true;
+	}
+	
+	if (Game.time % 60 === 0){  
+		return true;
+	}
+}
+
+function getTargetWithMostNeedForRepair(structures){	
+		
+	if (selectNewTarget()){   	 
+		var mostNeedForRepair = structures[0];
+		for (var i=0; i<structures.length;i++){
+			var item = structures[i];
+			var hitsDiff = mostNeedForRepair.hits - item.hits;
+		
+			if (hitsDiff>0){
+	    		mostNeedForRepair =  item;
+			}			
+		}
+		mostNeedForRepair.room.memory.targetForRepair
+	}
+	
+	return Game.getObjectById(mostNeedForRepair.room.memory.targetForRepair);
 }
 
 function setRepairFlagForCreep(creep){	
