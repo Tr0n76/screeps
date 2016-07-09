@@ -1,25 +1,28 @@
 module.exports  = {
 
 	run : function(creep, source) {
-		
-		setRepairFlagForCreep(creep);
-		
-    	
-    	if (creep.memory.repair) {     		    
-			var structures = getTargetsForRepair(creep);
-			clearRepairList(structures);
-			var item = getTargetWithMostNeedForRepair(structures);
+			try{
+			setRepairFlagForCreep(creep);
 			
-			if (!creep.pos.isNearTo(item)) {
-				creep.moveTo(item);
-			} else {
-				creep.repair(item);
-			}
-    	}else{
-    		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {  	    		
-    			creep.moveTo(source);    			
-    		}
-    	}
+	    	
+	    	if (creep.memory.repair) {     		    
+				var structures = getTargetsForRepair(creep);
+				clearRepairList(structures);
+				var item = getTargetWithMostNeedForRepair(structures);
+				
+				if (!creep.pos.isNearTo(item)) {
+					creep.moveTo(item);
+				} else {
+					creep.repair(item);
+				}
+	    	}else{
+	    		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {  	    		
+	    			creep.moveTo(source);    			
+	    		}
+	    	}
+		} catch(error){
+			console.log("Error in module repair: "+error.message);
+		}
 	}
 }
 
