@@ -14,7 +14,6 @@ module.exports  = {
 				creep.moveTo(item);
 			} else {
 				creep.repair(item);
-				console.log("Repair through creep "+creep.name+" "+item.structureType+" "+item.hits);
 			}
     	}else{
     		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {  	    		
@@ -24,15 +23,15 @@ module.exports  = {
 	}
 }
 
-function selectNewTarget(){
-	var actualTargetId = mostNeedForRepair.room.memory.targetForRepair;
+function selectNewTargetForRepair(actualTargetId){	
+   
 	if (!actualTargetId)
 	{
 		return true;
 	}
 	
-	var actualTarget = Game.getObjectById(mostNeedForRepair.room.memory.targetForRepair);
-	if (actualTarget){
+	var actualTarget = Game.getObjectById(actualTargetId);
+	if (!actualTarget){
 		return true;
 	}
 	
@@ -43,24 +42,28 @@ function selectNewTarget(){
 	if (Game.time % 60 === 0){  
 		return true;
 	}
+	
+	return false;
 }
 
-function getTargetWithMostNeedForRepair(structures){	
-		
-	if (selectNewTarget()){   	 
-		var mostNeedForRepair = structures[0];
-		for (var i=0; i<structures.length;i++){
-			var item = structures[i];
-			var hitsDiff = mostNeedForRepair.hits - item.hits;
-		
-			if (hitsDiff>0){
-	    		mostNeedForRepair =  item;
-			}			
-		}
-		mostNeedForRepair.room.memory.targetForRepair
-	}
-	
-	return Game.getObjectById(mostNeedForRepair.room.memory.targetForRepair);
+function getTargetWithMostNeedForRepair(structures){
+    var targetIdForRepair =  structures[0].room.memory.targetForRepairId;
+  
+    if (selectNewTargetForRepair(targetIdForRepair)){
+        mostNeedForRepair = structures[0];
+    	for (var i=0; i<structures.length;i++){
+    		var item = structures[i];
+    		var hitsDiff = mostNeedForRepair.hits - item.hits;
+    	
+    		if (hitsDiff>0){
+        		mostNeedForRepair =  item;
+    		}			
+    	}
+    	mostNeedForRepair.room.memory.targetForRepairId = mostNeedForRepair.id;
+    }
+	var target = Game.getObjectById(structures[0].room.memory.targetForRepairId);
+	console.log(target.id+" "+target.structureType+" "+target.hits+"/"+target.hitsMax);
+	return target;
 }
 
 function setRepairFlagForCreep(creep){	

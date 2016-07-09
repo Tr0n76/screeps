@@ -6,13 +6,13 @@ var roleRepair = require('role.repair');
 
 module.exports = {
 
-    run: function(room) {
+    run: function() {
     	        	
     	if (Game.time % 10 === 0){    		
-    		create(room);
+    		create();
     	}
     	
-        for(var name in room.creeps) {	    	
+        for(var name in Game.creeps) {	    	
 	    	var creep = Game.creeps[name];
 	    	setRoleForCreep(creep);
 	    }     
@@ -91,7 +91,7 @@ function getSourceForCreep(creep){
 } 
 
 // Creating all the creeps.
-function create(room) {
+function create(creps) {
 	
 	clean();
 	
@@ -101,33 +101,33 @@ function create(room) {
 		}
 	}
 	
-	if (createCreep(room,'harvester', 6, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
+	if (createCreep('harvester', 6, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}
-	if(createCreep(room,'upgrader', 2, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE])){
+	if(createCreep('upgrader', 2, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}
-	if(createCreep(room, 'repair', 4, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
+	if(createCreep('repair', 4, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}	
-	if(createCreep(room, 'builder', 2, [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE])){
+	if(createCreep('builder', 2, [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE])){
 		return;
 	}	
-	if(createCreep(room, 'guard', 4, [ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH])){
+	if(createCreep('guard', 4, [ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH])){
 		return;
 	}          
 }
 
 
 // Creates a single creep with the given role and work
-function createCreep(room, roleTyp, counter, work){
-    var exisitingCreeps = _.filter(room.creeps, (creep) => creep.memory.role == roleTyp);          
+function createCreep(roleTyp, counter, work){
+    var exisitingCreeps = _.filter(Game.creeps, (creep) => creep.memory.role == roleTyp);          
     if(exisitingCreeps.length < counter) {
-        var newName = room.spawns[0].createCreep(room, work, undefined, {role: roleTyp});
+        var newName = Game.spawns.Spawn1.createCreep(work, undefined, {role: roleTyp});
         if (newName<0){  
         	return true;
         }
-        console.log('Spawning new creep in room '+room.name +' for role '+roleTyp+' with name ' + newName);
+        console.log('Spawning new creep for role '+roleTyp+' with name ' + newName);
         return true;
     }
     return false;
@@ -143,10 +143,10 @@ function clean(){
     }
 }
 
-function isEmergencyCreepCreation(room){
+function isEmergencyCreepCreation(){
 	var counter = 0;
 
-	for(var name in room.creeps){
+	for(var name in Game.creeps){
 		var creep = Game.creeps[name];
 		if(creep.memory.role){
 		    if (creep.memory.role === 'harvester'){
