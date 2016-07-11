@@ -6,14 +6,16 @@ var roleRepair = require('role.repair');
 
 module.exports = {
 
-    run: function() {
+    run: function(room) {
     	        	
+        var creeps = room.find(FIND_MY_CREEPS);
+        
     	if (Game.time % 10 === 0){    		
-    		create();
+    		create(room, creeps);
     	}
     	
-        for(var name in Game.creeps) {	    	
-	    	var creep = Game.creeps[name];
+        for(var i=0; i<creeps.length; i++) {	    	
+	    	var creep = creeps[i];
 	    	setRoleForCreep(creep);
 	    }     
     	
@@ -91,39 +93,41 @@ function getSourceForCreep(creep){
 } 
 
 // Creating all the creeps.
-function create(creps) {
-	
+function create(room, creeps) {
+    
 	clean();
 	
 	if (isEmergencyCreepCreation()){	 
-		if (createCreep('harvester', 4, [WORK, WORK, CARRY, MOVE])){
+		if (createCreep(room, creeps, 'harvester', 4, [WORK, WORK, CARRY, MOVE])){
 			return;
 		}
 	}
 	
-	if (createCreep('harvester', 6, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
+	if (createCreep(room, creeps, 'harvester', 6, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}
-	if(createCreep('upgrader', 4, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE])){
+	if(createCreep(room, creeps, 'upgrader', 4, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}
-	if(createCreep('repair', 4, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
+	if(createCreep(room, creeps, 'repair', 4, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}	
-	if(createCreep('builder', 2, [WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE])){
+	if(createCreep(room, creeps, 'builder', 2, [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,  MOVE, MOVE])){
 		return;
 	}	
-	if(createCreep('guard', 4, [ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH])){
+	if(createCreep(room, creeps, 'guard', 4, [ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH])){
 		return;
 	}          
 }
 
 
 // Creates a single creep with the given role and work
-function createCreep(roleTyp, counter, work){
-    var exisitingCreeps = _.filter(Game.creeps, (creep) => creep.memory.role == roleTyp);          
+function createCreep(room, creeps, roleTyp, counter, work){
+    var exisitingCreeps = _.filter(creeps, (creep) => creep.memory.role == roleTyp);          
+
     if(exisitingCreeps.length < counter) {
-        var newName = Game.spawns.Spawn1.createCreep(work, undefined, {role: roleTyp});
+        var spawns = (room.find(FIND_MY_SPAWNS));
+        var newName = spawns[0].createCreep(work, undefined, {role: roleTyp});
         if (newName<0){  
         	return true;
         }
