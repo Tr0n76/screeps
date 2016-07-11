@@ -2,9 +2,9 @@ module.exports = {
 
     run: function(room) {
         
-        //if (Game.time % 60 === 0){  
-        //    build(room);
-    	//}
+        if (Game.time % 60 === 0){  
+            build(room);
+    	}
     }
     	  
 };
@@ -45,8 +45,6 @@ function buildRoad(room, constructionSites, from, to){
     var posTo = to.pos;
     
     var path = posFrom.findPathTo(posTo, { ignoreCreeps: true });
-    
-    console.log(path[0]+" "+path[0].structureType);
 
     for (var i=0; i<path.length; i++){
       
@@ -62,7 +60,8 @@ function createConstructionSite(room, constructionSites, pos, type){
         return;
     }
     
-   var rc = room.createConstructionSite(pos, type);
+   var rc = room.createConstructionSite(pos.x, pos.y, type);
+   console.log(type+" "+pos.x+"/"+pos.y+" "+rc);
 }
 
 
