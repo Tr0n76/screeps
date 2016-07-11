@@ -1,7 +1,9 @@
 module.exports = {
 
     run: function(room) {
-        
+       
+         console.log(rampartes.length);
+            
         if (Game.time % 60 === 0){  
             build(room);
     	}
@@ -15,12 +17,11 @@ function build(room){
             var towers = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
             var constructionSites = room.find(FIND_MY_CONSTRUCTION_SITES);
             var controller = room.controller;
-            var roads = [];
-            
+            var ramparts = room.find(FIND_STRUCTURES , {filter: {structureType: STRUCTURE_RAMPART}});
+             
             if (constructionSites.length>=100){
                 return;
             }
-      
           
             for (var i=0; i<spawns.length; i++){
                 
@@ -28,8 +29,12 @@ function build(room){
                     buildRoad(room, constructionSites, spawns[i], sources[j]);   
                 }
                 
-            for (var j=0; j<towers.length; j++){
+                for (var j=0; j<towers.length; j++){
                     buildRoad(room, constructionSites, spawns[i], towers[j]);   
+                }
+                
+                for (var j=0; j<ramparts.length; j++){
+                    buildRoad(room, constructionSites, spawns[i], ramparts[j]);   
                 }
                 
                 buildRoad(room, constructionSites, spawns[i], controller);   
@@ -60,8 +65,7 @@ function createConstructionSite(room, constructionSites, pos, type){
         return;
     }
     
-   var rc = room.createConstructionSite(pos.x, pos.y, type);
-   console.log(type+" "+pos.x+"/"+pos.y+" "+rc);
+   room.createConstructionSite(pos.x, pos.y, type);
 }
 
 
