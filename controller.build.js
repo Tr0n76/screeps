@@ -5,7 +5,7 @@ module.exports = {
          console.log(rampartes.length);
             
         if (Game.time % 60 === 0){  
-            build(room);
+            build(room);  
     	}
     }
     	  
