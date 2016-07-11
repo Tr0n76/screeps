@@ -1,9 +1,7 @@
 module.exports = {
 
     run: function(room) {
-       
-         console.log(rampartes.length);
-            
+             
         if (Game.time % 60 === 0){  
             build(room);  
     	}
