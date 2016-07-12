@@ -38,9 +38,9 @@ function build(room){
                 buildRoad(room, constructionSites, spawns[i], controller);   
             }
             
-            
-      
-         
+            for (var j=0; j<sources.length; j++){
+                buildRoad(room, constructionSites, sources[i], controller);   
+            }                                    
 	}
 
 function buildRoad(room, constructionSites, from, to){   
