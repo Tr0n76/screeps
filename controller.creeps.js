@@ -103,10 +103,10 @@ function create(room, creeps) {
 		}
 	}
 	
-	if (createCreep(room, creeps, 'harvester', 6, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
+	if (createCreep(room, creeps, 'harvester', 8, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}
-	if(createCreep(room, creeps, 'upgrader', 4, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE])){
+	if(createCreep(room, creeps, 'upgrader', 2, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE])){
 		return;
 	}
 	if(createCreep(room, creeps, 'repair', 4, [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE])){
@@ -115,7 +115,7 @@ function create(room, creeps) {
 	if(createCreep(room, creeps, 'builder', 2, [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,  MOVE, MOVE])){
 		return;
 	}	
-	if(createCreep(room, creeps, 'guard', 4, [ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH])){
+	if(createCreep(room, creeps, 'guard', 2, [ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH])){
 		return;
 	}          
 }
